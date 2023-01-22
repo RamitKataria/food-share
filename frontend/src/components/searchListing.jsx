@@ -42,7 +42,7 @@ const ListingRight = () => {
   const listing = posts.map((item) => {
     return (
       <Card key={item.id} style={{ width: "12rem", margin: "10px" }}>
-        <Card.Img variant="top" src={item.image} />
+        <Card.Img variant="top" src={item.image || "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"} />
         <Card.Body>
           <Card.Title>{item.title}</Card.Title>
           <Card.Text>
@@ -90,7 +90,7 @@ const ListingRight = () => {
         <Modal.Body>
           <div className="moreinfo">
             <img
-              src={modalInfo.image}
+              src={modalInfo.image || "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}
               alt="item"
               style={{ width: "50%", marginRight: "10px" }}
             />
