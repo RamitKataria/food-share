@@ -32,6 +32,17 @@ export const getPost = async (postId) => {
 	return response.json();
 };
 
+export const getPosts = async () => {
+	const link = url;
+	const response = await fetch(link, {
+		method: 'GET',
+		headers: {
+			// 'Authorization': await getAuthHeader()
+		}
+	});
+	return response.json();
+};
+
 export const deletePost = async (postId) => {
 	const link = url + postId;
 	const response = await fetch(link, {

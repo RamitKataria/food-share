@@ -1,36 +1,16 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/listing.css";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Alert from "react-bootstrap/Alert";
+import {getPosts} from "../redux/posts/service"
 
 const ListingRight = () => {
-  const array = [
-    {
-      title: "Title1",
-      location: "Location1",
-      expirationDate: "Expiration Date1",
-      quantity: "Quantity1",
-      description: "Description1",
-    },
-    {
-      title: "Title2",
-      location: "Location2",
-      expirationDate: "Expiration Date2",
-      quantity: "Quantity2",
-      description: "Description2",
-    },
-    {
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-    },
-  ];
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect( async () => {
+    const response = await getPosts();
+    setPosts(response);
+
+  }, []);
 
   const AccountInfo = {
     username: "username",
@@ -44,7 +24,7 @@ const ListingRight = () => {
     email: "email",
   };
 
-  const listing = array.map((item) => {
+  const listing = posts.map((item) => {
     return (
       <div className="listing">
         <div className="listing-header">

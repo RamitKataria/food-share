@@ -134,6 +134,20 @@ router.get('/:postID', async function (req, res) {
 	}
 });
 
+router.get('/', async function (req, res) {
+	try {
+		const postObj = await Post.find({}).lean();
+// 		if (!postObj) {
+// 			return res.status(404).send('Not found');
+// 		}
+// 		const populatedPost = await populateUsers(postObj)
+		return res.send(postObj);
+	} catch (e) {
+		console.log(e);
+		res.status(500).send("Internal Server Error");
+	}
+});
+
 /**
  * Create post instance, add to user document
  */
