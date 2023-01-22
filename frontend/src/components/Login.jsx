@@ -270,8 +270,8 @@ const Login = () => {
   }, [userL, pwdL]);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-
+//    e.preventDefault();
+    navigate('/')
     try {
     } catch (err) {
     }
