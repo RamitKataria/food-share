@@ -20,7 +20,7 @@ const Layout = () => {
       <nav className="navbar navbar-dark bg-dark justify-content-between navbar-head">
         <a className="navbar-brand">
           {" "}
-          <h1>Food Share &lt3</h1>{" "}
+          <h1>Food Share ❤️</h1>{" "}
         </a>
         <div className="nav">
           <span className="nav-item">
