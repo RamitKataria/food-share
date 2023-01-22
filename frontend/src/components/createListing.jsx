@@ -132,8 +132,7 @@ const ListingLeft = () => {
         >
           <h3>Search</h3>
           <div className={`${grow ? "hidden" : "box"}`}>
-            <div className="box-content">
-              <div className="box-header">
+
                 <div className="box-close" onClick={() => setGrow(!grow)}>
                   <Form onSubmit={handleSearchSubmit}>
                     <Row className="mb-3">
@@ -200,8 +199,7 @@ const ListingLeft = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+
       </div>
     </>
   );
