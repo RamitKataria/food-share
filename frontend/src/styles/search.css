@@ -78,16 +78,22 @@
   }
 
   .content-area{
+    background: url('./bgmaps.jpg') no-repeat center center fixed;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     flex-grow: 1; 
+    /* width: 100%; */
+    justify-content: space-between;
+    /* height: 100vh; */
   }
 
   .search-area{
-    flex-grow: 1;
-    padding: 30px;
-    height: 90vh;
+    /* flex-grow: 1; */
     overflow-y: scroll;
+    display: flex;
+    width: auto;
+    /* margin: auto; */
+
   }
 
   .search-res{

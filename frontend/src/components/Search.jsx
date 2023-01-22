@@ -46,10 +46,10 @@ const Search = () => {
 
 
   return (
-    <div className="content-area">
+
       <div className="search-area">
+          hello world
       </div>
-    </div>
   );
 };
 

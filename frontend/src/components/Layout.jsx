@@ -4,6 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import '../styles/layout.css'
 import user from '../styles/user.png'
 import '../styles/search.css';
+import ListingLeft from "./createListing";
+import ListingRight from "./searchListing";
 
 const Layout = () => {
 
@@ -16,24 +18,23 @@ const Layout = () => {
 
 const navbar = ()=>{
     return (
-
-            <nav className="navbar navbar-dark bg-dark justify-content-between navbar-head">
-                <a className="navbar-brand"> <h1>Ultimate App</h1> </a>
-                <div className="nav" >
-                    <span className="nav-item" >
-                        <a className="nav-link" href="/" style={{"color":"white"}}> Set Location </a>
-                    </span>
-                    {/* <span className="nav-item">
-                        <a className="nav-link" href="/cart" style={{"color":"white"}}> Cart </a>
-                    </span>
-                    <span className="nav-item">
-                        <a className="nav-link" href="/history" style={{"color":"white"}}> Search History </a>
-                    </span> */}
-                    <button className="btn btn-danger" onClick={signOut}>
-                        Sign out
-                    </button>
-                </div>
-            </nav>
+      <nav className="navbar navbar-dark bg-dark justify-content-between navbar-head">
+          <a className="navbar-brand"> <h1>Ultimate App</h1> </a>
+          <div className="nav" >
+              <span className="nav-item" >
+                  <a className="nav-link" href="/" style={{"color":"white"}}> Set Location </a>
+              </span>
+              {/* <span className="nav-item">
+                  <a className="nav-link" href="/cart" style={{"color":"white"}}> Cart </a>
+              </span>
+              <span className="nav-item">
+                  <a className="nav-link" href="/history" style={{"color":"white"}}> Search History </a>
+              </span> */}
+              <button className="btn btn-danger" onClick={signOut}>
+                  Sign out
+              </button>
+          </div>
+      </nav>
     );
 }
 
@@ -127,8 +128,12 @@ const sidebar = ()=>{
     <main className="App">
         {navbar()}
         <div className="content-area">
-            {sidebar()}
-            <Outlet />
+            {/* {sidebar()} */}
+            <ListingLeft />
+            
+            <div className="search-area">
+              <ListingRight/>
+            </div>
         </div>
     </main>
   );
