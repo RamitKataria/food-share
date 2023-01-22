@@ -52,7 +52,7 @@ router.post("/availability/:postID/:userID", async function(req, res) {
 
 		await addPostToUser(user, req.params.postID);
 
-		return res.send(removeForbiddenFields(newPost));
+		return res.send(newPost);
 	}
 	catch (e) {
 		console.log(e);
@@ -95,7 +95,7 @@ router.put('/availability/ics/:postID/:userID', async function (req, res) {
 		const populatedPost = await populateUsers(post);
 
 		// return post
-		res.status(200).send(removeForbiddenFields(populatedPost));
+		res.status(200).send(populatedPost);
 	}
 	catch(e) {
 		console.log("Invalid ICS!");
@@ -110,10 +110,10 @@ router.patch('/:postID', async function (req, res) {
 		if (!post) {
 			return res.status(404).send('Not found');
 		}
-		const patches = removeForbiddenFields(req.body);
+		const patches = req.body;
 		Object.assign(post, patches);
 		await post.save();
-		return res.send(removeForbiddenFields(post));
+		return res.send(post);
 	} catch (e) {
 		console.log(e);
 		res.status(500).send("Internal Server Error");
@@ -127,7 +127,21 @@ router.get('/:postID', async function (req, res) {
 			return res.status(404).send('Not found');
 		}
 		const populatedPost = await populateUsers(postObj)
-		return res.send(removeForbiddenFields(populatedPost));
+		return res.send(populatedPost);
+	} catch (e) {
+		console.log(e);
+		res.status(500).send("Internal Server Error");
+	}
+});
+
+router.get('/', async function (req, res) {
+	try {
+		const postObj = await Post.find({}).lean();
+// 		if (!postObj) {
+// 			return res.status(404).send('Not found');
+// 		}
+// 		const populatedPost = await populateUsers(postObj)
+		return res.send(postObj);
 	} catch (e) {
 		console.log(e);
 		res.status(500).send("Internal Server Error");
@@ -139,7 +153,7 @@ router.get('/:postID', async function (req, res) {
  */
 router.post('/', async function (req, res) {
 	try {
-		const newPost = new Post(removeForbiddenFields(req.body));
+		const newPost = new Post(req.body);
 		newPost.id = nanoid();
 		await newPost.save();
 		const user = await User.findOne({firebaseUID: newPost.createdBy});
@@ -147,7 +161,7 @@ router.post('/', async function (req, res) {
 		if (user) {
 			await addPostToUser(user, newPost.id);
 		}
-		return res.send(removeForbiddenFields(newPost));
+		return res.send(newPost);
 	} catch (e) {
 		console.log(e);
 		res.status(500).send("Internal Server Error");

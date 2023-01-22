@@ -1,109 +1,30 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/listing.css";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Alert from "react-bootstrap/Alert";
-import Card from "react-bootstrap/Card";
+import {getPosts} from "../redux/posts/service"
 
 const ListingRight = () => {
-  const [isBoxVisible, setIsBoxVisible] = useState(false);
-  const [modalInfo, setModalInfo] = useState({
-    id: "",
-    image: "",
-    title: "",
-    location: "",
-    expirationDate: "",
-    quantity: "",
-    description: "",
-  });
 
-  const array = [
-    {
-      id: 1,
-      title: "Title1",
-      location: "Location1",
-      expirationDate: "Expiration Date1",
-      quantity: "Quantity1",
-      description: "Description1",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      title: "Title2",
-      location: "Location2",
-      expirationDate: "Expiration Date2",
-      quantity: "Quantity2",
-      description: "Description2",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 3,
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 4,
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 5,
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 6,
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 7,
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 8,
-      title: "Title3",
-      location: "Location3",
-      expirationDate: "Expiration Date3",
-      quantity: "Quantity3",
-      description: "Description3",
-      image:
-        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-  ];
+  const [posts, setPosts] = useState([]);
 
-  const listing = array.map((item) => {
+  useEffect( async () => {
+    const response = await getPosts();
+    setPosts(response);
+
+  }, []);
+
+  const AccountInfo = {
+    username: "username",
+    logInId: "logInId",
+    password: "password",
+    address: "address",
+    city: "city",
+    state: "state",
+    zip: "zip",
+    phone: "phone",
+    email: "email",
+  };
+
+  const listing = posts.map((item) => {
     return (
       <Card key={item.id} style={{ width: "12rem", margin: "10px" }}>
         <Card.Img variant="top" src={item.image} />
