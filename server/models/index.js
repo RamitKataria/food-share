@@ -25,8 +25,16 @@ const PostSchema = new mongoose.Schema({
 const Post = mongoose.model('Post', PostSchema);
 
 const UserSchema = new mongoose.Schema({
-	ics: String,
+    id: {
+        type: String,
+        index: true,
+        unique: true
+    },
 	posts: [ { type: String, ref: 'Post' }],
+	username: String,
+	address: String,
+	zip: String,
+	city: String,
 	authToken: String
 });
 
