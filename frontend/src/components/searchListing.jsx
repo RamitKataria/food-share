@@ -26,35 +26,107 @@ const ListingRight = () => {
 
   const listing = posts.map((item) => {
     return (
-      <div className="listing">
-        <div className="listing-header">
-          <div className="listing-title">{item.title}</div>
-          <div className="listing-location">{item.location}</div>
-        </div>
-        <div className="listing-body">
-          <div className="listing-expirationDate">{item.expirationDate}</div>
-          <div className="listing-quantity">{item.quantity}</div>
-        </div>
-        <div className="listing-footer">
-          <div className="listing-description">{item.description}</div>
-        </div>
-      </div>
+      <Card key={item.id} style={{ width: "12rem", margin: "10px" }}>
+        <Card.Img variant="top" src={item.image} />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </Card.Text>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setIsBoxVisible(true);
+              setModalInfo({
+                id: item.id,
+                image: item.image,
+                title: item.title,
+                location: item.location,
+                expirationDate: item.expirationDate,
+                quantity: item.quantity,
+                description: item.description,
+              });
+            }}
+          >
+            Go somewhere
+          </Button>
+        </Card.Body>
+      </Card>
     );
   });
+
+  const ModalItem = () => {
+    return (
+      <Modal
+        show={isBoxVisible}
+        onHide={() => setIsBoxVisible(false)}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        style={{ width: "100vw", position: "absolute" }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            <strong>
+              {modalInfo.title} (#{modalInfo.id})
+            </strong>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="moreinfo">
+            <img
+              src={modalInfo.image}
+              alt="item"
+              style={{ width: "50%", marginRight: "10px" }}
+            />
+            <div>
+              <strong>Location:</strong> {modalInfo.location}
+              <br />
+              <strong>Expiration Date:</strong> {modalInfo.expirationDate}
+              <br />
+              <strong>Quantity:</strong> {modalInfo.quantity}
+              <br />
+              <strong>Description:</strong> {modalInfo.description}
+              <br />
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <Form>
+            <Form.Group>
+              <Row>
+                <Col>
+                <Form.Control
+                  as="textarea"
+                  rows={2}
+                  placeholder="Send a Message"
+                  name="message"
+                  style={{ width: "300px" }}
+                />
+                </Col>
+                <Col>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+                </Col>
+              </Row>
+            </Form.Group>
+          </Form>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
 
   return (
     <>
       <div className="createSearch">
-        <div
-          className="grow search">
+        <div className="grow search">
           <h3>Listings</h3>
-          <div className="box">
-            <div className="box-content">
-              <div className="box-header">
-                  {listing}
-                
-              </div>
-            </div>
+          <div className="box-content">
+            <ModalItem />
+            {listing}
           </div>
         </div>
       </div>
