@@ -1,16 +1,31 @@
 import React, {useEffect, useState} from "react";
 import "../styles/listing.css";
-import {getPosts} from "../redux/posts/service"
+import {getPosts} from "../redux/posts/service";
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const ListingRight = () => {
 
   const [posts, setPosts] = useState([]);
-
+  const [isBoxVisible, setIsBoxVisible] = useState(false);
   useEffect( async () => {
     const response = await getPosts();
     setPosts(response);
-
   }, []);
+
+  const [modalInfo, setModalInfo] = useState({
+    id: "",
+    image: "",
+    title: "",
+    location: "",
+    expirationDate: "",
+    quantity: "",
+    description: "",
+  });
 
   const AccountInfo = {
     username: "username",

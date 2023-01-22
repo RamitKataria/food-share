@@ -17,7 +17,7 @@ const ListingLeft = () => {
   const [location, setLocation] = useState("");
 
   const handleCreateSubmit = async (e) => {
-    e.preventDefault();
+
     let form = {
       title: e.target.title.value,
       location: e.target.location.value,
