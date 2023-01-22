@@ -1,7 +1,8 @@
 
-const url = process.env.REACT_APP_SERVER_URL + '/posts/';
+// const url = process.env.REACT_APP_SERVER_URL + '/posts/';
+const url = 'http://localhost:3001/api/posts/';
 
-const addPost = async (content) => {
+export const addPost = async (content) => {
 	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
@@ -31,7 +32,7 @@ export const getPost = async (postId) => {
 	return response.json();
 };
 
-const deletePost = async (postId) => {
+export const deletePost = async (postId) => {
 	const link = url + postId;
 	const response = await fetch(link, {
 		method: 'DELETE',
@@ -46,7 +47,7 @@ const deletePost = async (postId) => {
 	return data;
 };
 
-const updatePost = async (postId, content) => {
+export const updatePost = async (postId, content) => {
 	const link = url + postId;
 	const response = await fetch(link, {
 		method: 'PATCH',

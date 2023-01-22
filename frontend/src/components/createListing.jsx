@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Alert from 'react-bootstrap/Alert';
+import {addPost} from "../redux/posts/service.js"
 
 const ListingLeft = () => {
   const [isBoxVisible, setIsBoxVisible] = useState(false);
@@ -47,6 +48,22 @@ const AccountInfo = {
   phone: "phone",
   email: "email"
 }
+
+const handleCreateMeeting = async (event) => {
+    event.preventDefault();
+    // this is how i should access the valus later.
+    await addPost({
+      title: event.target.title.value,
+      location: event.target.location.value,
+      expirationDate: event.target.expirationDate.value,
+      quantity: event.target.quantity.value,
+      description: event.target.description.value
+    }).then(() => {
+      // toast("👤 Account Updated!");
+    }).catch((error) => {
+      // toast("👤 ERR! Account NOT Updated!");
+    });
+  };
 
 
 const ModalItem = () => {
@@ -105,7 +122,7 @@ const ModalItem = () => {
   </Modal.Body>
   <Modal.Footer>
   {showAlert?<Alert key='success' variant='success'> Listing Posted! </Alert>:null}
-  <Button >Create Listing</Button>
+  <Button onClick={handleCreateMeeting}>Create Listing</Button>
   </Modal.Footer>
 </Modal>
 );
