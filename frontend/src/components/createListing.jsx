@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../styles/listing.css";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Alert from "react-bootstrap/Alert";
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Alert from 'react-bootstrap/Alert';
+import {addPost} from "../redux/posts/service.js"
 
 const ListingLeft = () => {
   const [isBoxVisible, setIsBoxVisible] = useState(false);
@@ -15,7 +16,7 @@ const ListingLeft = () => {
   const [radius, setRadius] = useState(0);
   const [location, setLocation] = useState("");
 
-  const handleCreateSubmit = (e) => {
+  const handleCreateSubmit = async (event) => {
     e.preventDefault();
     let form = {
       title: e.target.title.value,
@@ -25,6 +26,11 @@ const ListingLeft = () => {
       description: e.target.description.value,
     };
     console.log(form);
+    await addPost(form).then(() => {
+      // toast("👤 Account Updated!");
+    }).catch((error) => {
+      // toast("👤 ERR! Account NOT Updated!");
+    });
   };
 
   const handleSearchSubmit = (e) => {
