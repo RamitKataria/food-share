@@ -10,14 +10,16 @@ const PostSchema = new mongoose.Schema({
 		index: true,
 		unique: true
 	},
-	name: {
+	title: {
 		type: String,
-		required: [true, 'Why no post name?']
+		required: [true, 'Why no post title?']
 	},
 	description: String,
 	dateTimeCreated: Date,
 	createdBy: { type: String, ref: 'User' },
 	expirationDate: Date,
+	location: String,
+	quantity: Number
 });
 
 const Post = mongoose.model('Post', PostSchema);
