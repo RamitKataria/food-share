@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // const { deleteUserInFirebase} = require('../auth')
-const { Post, User, removeForbiddenFields } = require("../models");
+const { Post, User } = require("../models");
 
 
 router.get('/:userID/posts', async function (req, res) {
@@ -24,7 +24,7 @@ router.get('/:userID', async function (req, res) {
 		if (!user) {
 			return res.status(404).send('Not found');
 		}
-		return res.send(removeForbiddenFields(user));
+		return res.send(user);
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send('Internal server error');
@@ -37,11 +37,11 @@ router.patch('/:userID', async function (req, res) {
 		if (!user) {
 			return res.status(404).send('Not found');
 		}
-		const patches = removeForbiddenFields(req.body);
+		const patches = req.body;
 		Object.assign(user, patches);
 		console.log('patching user\n' + JSON.stringify(patches))
 		await user.save();
-		return res.send(removeForbiddenFields(user));
+		return res.send(user);
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send('Internal server error');
@@ -109,7 +109,7 @@ router.post('/', async function (req, res) {
 		}
 		const newUser = new User({firebaseUID: req.user.uid});
 		await newUser.save();
-		return res.status(200).send(removeForbiddenFields(newUser));
+		return res.status(200).send(newUser);
 	} catch (e) {
 		console.log(e);
 		return res.status(500).send('Internal server error');

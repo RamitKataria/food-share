@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Alert from 'react-bootstrap/Alert';
-import {addPost} from "../redux/posts/service.js"
+import {addPost} from "../redux/posts/service"
 
 const ListingLeft = () => {
   const [isBoxVisible, setIsBoxVisible] = useState(false);
@@ -16,7 +16,7 @@ const ListingLeft = () => {
   const [radius, setRadius] = useState(0);
   const [location, setLocation] = useState("");
 
-  const handleCreateSubmit = async (event) => {
+  const handleCreateSubmit = async (e) => {
     e.preventDefault();
     let form = {
       title: e.target.title.value,
