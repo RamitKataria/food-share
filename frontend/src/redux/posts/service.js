@@ -1,6 +1,6 @@
 
-// const url = process.env.REACT_APP_SERVER_URL + '/posts/';
-const url = 'http://localhost:3001/api/posts/';
+const url = import.meta.env.VITE_SERVER_URL + '/api/posts/';
+// const url = 'http://localhost:3001/api/posts/';
 
 export const addPost = async (content) => {
 	const response = await fetch(url, {
